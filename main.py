@@ -11,6 +11,8 @@ from pacman import *
 from enemy import *
 import collision_objects
 
+#test#
+
 pygame.init()  # to init pygame
 clock = pygame.time.Clock()
 borders = [1270, 680]
