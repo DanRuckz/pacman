@@ -4,12 +4,19 @@ import csv
 import os
 from settings import *
 
-tiles = []
 
 
-class Tiles:
+class Tiles(pygame.sprite.Sprite):
+    def __init__(self, mapSize):
+        super().__init__()
+        self.bigSurface = pygame.Surface(mapSize)
+        self.bigSurface.set_colorkey((0, 0, 0))
+        self.tiles = []
+        self.parseData()
+        self.fillMap()
 
-    def __init__(self):
+
+    def parseData(self):
         key = "none"
         csvmap = self.readcsv("spritesheet/big_map.csv")
         x = y = 0
@@ -18,12 +25,9 @@ class Tiles:
             for tile in row:
                 key = int(tile)
                 key = int(tile)
-                tiles.append(Tile(key, x * CUBESIZE, y * CUBESIZE, key * CUBESIZE, 0))
+                self.tiles.append(Tile(key, x * CUBESIZE, y * CUBESIZE, key * CUBESIZE, 0))
                 x += 1
             y += 1
-        self.map_w, self.map_h = x * CUBESIZE, y * CUBESIZE
-        self.map_surface = pygame.Surface((self.map_w, self.map_h))
-        self.map_surface.set_colorkey((0, 0, 0))
 
     def readcsv(self, filename):
         csvmap = []
@@ -33,12 +37,21 @@ class Tiles:
                 csvmap.append(list(row))
             return csvmap
 
+    def fillMap(self):
+        for tile in self.tiles:
+            self.bigSurface.blit(LoadFile.map, (tile.posx, tile.posy), tile.getRect())
+
+    def drawMap(self):
+        return self.bigSurface
+
 
 class Tile:
 
     def initrect(self):
-        rect = pygame.Rect(self.rectx, self.recty, CUBESIZE, CUBESIZE)
-        return rect
+        self.rect = pygame.Rect(self.rectx, self.recty, CUBESIZE, CUBESIZE)
+
+    def getRect(self):
+        return self.rect
 
     def __init__(self, key, posx, posy, rectx, recty):
         self.key = key

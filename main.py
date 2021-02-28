@@ -22,7 +22,7 @@ screen = pygame.display.set_mode(borders)
 pygame.display.set_caption("My Game")
 icon = pygame.image.load("sea.png")
 pygame.display.set_icon(icon)
-Tiles()
+map = Tiles(borders)
 #map.Hitbox.insertPlayer(map.Hitbox)
 #rect = map.Hitbox.drawMapHitboxes(map.Hitbox, screen)
 
@@ -37,11 +37,11 @@ def drawPlayer():
 
 
 
-def drawMap():
-    for obj in tiles:
+#def drawMap():
+    #for obj in tiles:
         #print(obj.rectx,obj.recty)
-        rect = obj.initrect()
-        screen.blit(LoadFile.map, (obj.posx, obj.posy), rect)
+        #rect = obj.initrect()
+        #screen.blit(LoadFile.map, (obj.posx, obj.posy), rect)
 
 
 
@@ -55,8 +55,9 @@ collision = False
 running = True
 while running:
     screen.fill((0, 0, 0))
+    screen.blit(map.drawMap(), (0, 0))
     drawPlayer()
-    drawMap()
+    #drawMap()
     keys = pygame.key.get_pressed()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
