@@ -12,6 +12,7 @@ from enemy import *
 import collision_objects
 
 pygame.init()  # to init pygame
+clock = pygame.time.Clock()
 borders = [1270, 680]
 origin = OFFSET
 # to create screen
@@ -19,7 +20,7 @@ screen = pygame.display.set_mode(borders)
 pygame.display.set_caption("My Game")
 icon = pygame.image.load("sea.png")
 pygame.display.set_icon(icon)
-Tiles.loadMap(Tiles)
+Tiles()
 #map.Hitbox.insertPlayer(map.Hitbox)
 #rect = map.Hitbox.drawMapHitboxes(map.Hitbox, screen)
 
@@ -36,11 +37,14 @@ def drawPlayer():
 
 def drawMap():
     for obj in tiles:
-        print(obj.rectx,obj.recty)
+        #print(obj.rectx,obj.recty)
         rect = obj.initrect()
         screen.blit(LoadFile.map, (obj.posx, obj.posy), rect)
-        #screen.blit(Tile.Map, Tile.POS, Tile.sprites[1])
 
+
+
+
+        #screen.blit(Tile.Map, Tile.POS, Tile.sprites[1])
 #def enemyMove():
     #screen.blit(Enemy.Enemy, (Enemy.posx, Enemy.posy))
     #auxiliary.drawHitbox(screen, enemy.Enemy)
@@ -73,7 +77,7 @@ while running:
     #mapColision(rect)
     #print(Player.rect)
     pygame.display.update()
-
+    clock.tick(60)
 # if event.type == pygame.KEYDOWN: --- for single key press
 # if event.type == pygame.KEYUP: -- for single key press then release
 #   if event.key == pygame.K_a or event.key == pygame.K_d:

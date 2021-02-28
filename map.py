@@ -9,18 +9,9 @@ tiles = []
 
 class Tiles:
 
-    def readcsv(self, filename):
-        csvmap = []
-        with open(os.path.join(filename)) as data:
-            data = csv.reader(data, delimiter=',')
-            for row in data:
-                csvmap.append(list(row))
-            return csvmap
-
-
-    def loadMap(self):
+    def __init__(self):
         key = "none"
-        csvmap = self.readcsv(self, "spritesheet/big_map.csv")
+        csvmap = self.readcsv("spritesheet/big_map.csv")
         x = y = 0
         for row in csvmap:
             x = 0
@@ -30,6 +21,17 @@ class Tiles:
                 tiles.append(Tile(key, x * CUBESIZE, y * CUBESIZE, key * CUBESIZE, 0))
                 x += 1
             y += 1
+        self.map_w, self.map_h = x * CUBESIZE, y * CUBESIZE
+        self.map_surface = pygame.Surface((self.map_w, self.map_h))
+        self.map_surface.set_colorkey((0, 0, 0))
+
+    def readcsv(self, filename):
+        csvmap = []
+        with open(os.path.join(filename)) as data:
+            data = csv.reader(data, delimiter=',')
+            for row in data:
+                csvmap.append(list(row))
+            return csvmap
 
 
 class Tile:
