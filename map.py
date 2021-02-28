@@ -15,7 +15,6 @@ class Tiles(pygame.sprite.Sprite):
         self.parseData()
         self.fillMap()
 
-
     def parseData(self):
         key = "none"
         csvmap = self.readcsv("spritesheet/big_map.csv")
@@ -44,6 +43,8 @@ class Tiles(pygame.sprite.Sprite):
     def drawMap(self):
         return self.bigSurface
 
+    def drawObject(self, image, position, rect):
+        self.bigSurface.blit(image, position, rect)
 
 class Tile:
 

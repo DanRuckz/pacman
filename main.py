@@ -11,18 +11,19 @@ from pacman import *
 from enemy import *
 import collision_objects
 
-#test#
-
 pygame.init()  # to init pygame
 clock = pygame.time.Clock()
-borders = [1270, 680]
+borders = [750, 1190]
 origin = OFFSET
+
 # to create screen
 screen = pygame.display.set_mode(borders)
-pygame.display.set_caption("My Game")
+pygame.display.set_caption("Pacman")
 icon = pygame.image.load("sea.png")
 pygame.display.set_icon(icon)
-map = Tiles(borders)
+fullMap = Tiles(borders)
+
+
 #map.Hitbox.insertPlayer(map.Hitbox)
 #rect = map.Hitbox.drawMapHitboxes(map.Hitbox, screen)
 
@@ -37,13 +38,8 @@ def drawPlayer():
 
 
 
-#def drawMap():
-    #for obj in tiles:
-        #print(obj.rectx,obj.recty)
-        #rect = obj.initrect()
-        #screen.blit(LoadFile.map, (obj.posx, obj.posy), rect)
-
-
+def drawMap():
+    screen.blit(fullMap.drawMap(), (0, TOPSECTION))
 
 
         #screen.blit(Tile.Map, Tile.POS, Tile.sprites[1])
@@ -55,9 +51,8 @@ collision = False
 running = True
 while running:
     screen.fill((0, 0, 0))
-    screen.blit(map.drawMap(), (0, 0))
     drawPlayer()
-    #drawMap()
+    drawMap()
     keys = pygame.key.get_pressed()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -76,7 +71,7 @@ while running:
     if keys[pygame.K_ESCAPE]:
         running = False
     Move.movement(pacman.Player, direction)
-    # auxiliary.divideMap(screen)
+    #auxiliary.divideMap(screen)
     #mapColision(rect)
     #print(Player.rect)
     pygame.display.update()

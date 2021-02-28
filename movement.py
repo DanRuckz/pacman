@@ -4,7 +4,6 @@ import auxiliary
 import enemy
 from entity import entity
 
-borders = [1260, 1000]
 direction = "None"
 
 class Move:
