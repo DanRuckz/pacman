@@ -20,7 +20,7 @@ class Tiles:
 
     def loadMap(self):
         key = "none"
-        csvmap = self.readcsv(self, "spritesheet/big_`map.csv")
+        csvmap = self.readcsv(self, "spritesheet/big_map.csv")
         x = y = 0
         for row in csvmap:
             x = 0
