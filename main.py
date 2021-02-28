@@ -10,7 +10,7 @@ from movement import direction
 from pacman import *
 from enemy import *
 import collision_objects
-
+#testtesttest
 pygame.init()  # to init pygame
 borders = [1270, 680]
 origin = OFFSET
