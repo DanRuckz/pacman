@@ -50,8 +50,8 @@ def resizeSurface(Surface):
 collision = False
 running = True
 while running:
-    #fullMap.getSurface().fill((0, 0, 0))
     screen.fill((0, 0, 0))
+    #fullMap.getSurface().fill((0, 0, 0))
     drawObjects()
     keys = pygame.key.get_pressed()
     for event in pygame.event.get():
