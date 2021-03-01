@@ -40,11 +40,12 @@ class Tiles(pygame.sprite.Sprite):
         for tile in self.tiles:
             self.bigSurface.blit(LoadFile.map, (tile.posx, tile.posy), tile.getRect())
 
-    def drawMap(self):
+    def getSurface(self):
         return self.bigSurface
 
     def drawObject(self, image, position, rect):
         self.bigSurface.blit(image, position, rect)
+
 
 class Tile:
 

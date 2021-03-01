@@ -13,11 +13,11 @@ import collision_objects
 
 pygame.init()  # to init pygame
 clock = pygame.time.Clock()
-borders = [750, 1190]
+borders = [750, 991]
 origin = OFFSET
 
 # to create screen
-screen = pygame.display.set_mode(borders)
+screen = pygame.display.set_mode(borders, pygame.RESIZABLE)
 pygame.display.set_caption("Pacman")
 icon = pygame.image.load("sea.png")
 pygame.display.set_icon(icon)
@@ -32,17 +32,17 @@ fullMap = Tiles(borders)
        # temp = pygame.Rect(element)
         #auxiliary.hitboxCollision(Player.rect, temp)
 
-
-def drawPlayer():
-    screen.blit(Player.Player, (Player.posx, Player.posy), Player.sprite)
-
-
-
-def drawMap():
-    screen.blit(fullMap.drawMap(), (0, TOPSECTION))
+def drawObjects():
+    screen.blit(fullMap.getSurface(), (0, TOPSECTION))
+    fullMap.drawObject(Player.Player, (Player.posx, Player.posy), Player.sprite)
+    #screen.blit(Player.Player, (Player.posx, Player.posy), Player.sprite)
 
 
-        #screen.blit(Tile.Map, Tile.POS, Tile.sprites[1])
+def resizeSurface(Surface):
+    Surface = pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
+
+
+    #screen.blit(Tile.Map, Tile.POS, Tile.sprites[1])
 #def enemyMove():
     #screen.blit(Enemy.Enemy, (Enemy.posx, Enemy.posy))
     #auxiliary.drawHitbox(screen, enemy.Enemy)
@@ -50,11 +50,14 @@ def drawMap():
 collision = False
 running = True
 while running:
+    #fullMap.getSurface().fill((0, 0, 0))
     screen.fill((0, 0, 0))
-    drawPlayer()
-    drawMap()
+    drawObjects()
     keys = pygame.key.get_pressed()
     for event in pygame.event.get():
+        if event.type == pygame.VIDEORESIZE:
+            resizeSurface(fullMap.getSurface())
+            resizeSurface(screen)
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYDOWN:
