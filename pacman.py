@@ -1,7 +1,7 @@
 import pygame
 import LoadFile
 from settings import *
-from entity import *
+from entity import Entity
 
 
 class Player(Entity):
@@ -29,6 +29,4 @@ class Player(Entity):
             self.sprite = pygame.Rect(504, 0, SPRITESIZE, SPRITESIZE)
             return self.sprite
 
-    def updatePosition(self):
-        self.rect.x = self.posx
-        self.rect.y = self.posy
+

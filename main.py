@@ -4,8 +4,6 @@ import enemy
 from map import *
 import auxiliary
 from settings import *
-from movement import Move
-from movement import direction
 from entity import Entity
 
 
@@ -34,7 +32,7 @@ def resizeSurface(Surface):
 
 collision = False
 running = True
-
+direction = 0
 
 while running:
     screen.fill((0, 0, 0))
