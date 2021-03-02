@@ -2,7 +2,7 @@ import pygame
 import pacman
 import auxiliary
 import enemy
-from entity import entity
+from entity import Entity
 
 direction = "None"
 
@@ -10,13 +10,13 @@ class Move:
     @staticmethod
     def movement(obj, direction):
         if direction == "Left":
-            obj.moveLeft(entity, obj)
+            obj.moveLeft(Entity, obj)
         if direction == "Right":
-            obj.moveRight(entity, obj)
+            obj.moveRight(Entity, obj)
         if direction == "Up":
-            obj.moveUp(entity, obj)
+            obj.moveUp(Entity, obj)
         if direction == "Down":
-            obj.moveDown(entity, obj)
+            obj.moveDown(Entity, obj)
         if direction == "None":
             rect = 0
 

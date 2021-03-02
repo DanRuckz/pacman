@@ -4,7 +4,8 @@ from settings import *
 from entity import *
 
 
-class Player(entity):
+class Player(Entity):
+
     Player = LoadFile.spritesheet
     sprite = pygame.Rect(168, 0, SPRITESIZE, SPRITESIZE)
     width = SPRITESIZE
@@ -12,12 +13,6 @@ class Player(entity):
     posx = 0
     posy = 0
     speed = 2
-    turnLeft = False
-    turnRight = False
-    turnUp = False
-    turnDown = False
-    # allTurns = (turnUp,turnDown,turnLeft,turnRight)
-    condition = "none"
     rect = pygame.Rect(posx, posy, width, height)
 
     def changeDirection(self, currentDirection):
