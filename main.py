@@ -1,7 +1,7 @@
 import pygame
 import pacman
 import enemy
-from map import *
+from map import mainMap
 import auxiliary
 from settings import *
 from entity import Entity
@@ -17,12 +17,12 @@ pygame.display.set_caption("Pacman")
 icon = pygame.image.load("sea.png")
 pygame.display.set_icon(icon)
 fullMap = mainMap(RESOLUTION)
-
+player = pacman.Player()
 
 def drawObjects():
     screen.blit(fullMap.getSurface(), (0, TOPSECTION))
-    #fullMap.drawObject(Player.Player, (Player.posx, Player.posy), Player.sprite)
-    screen.blit(pacman.Player.Player, (pacman.Player.posx, pacman.Player.posy), pacman.Player.sprite)
+    #fullMap.drawObject(pacman.Player.Player, (pacman.Player.posx, pacman.Player.posy), pacman.Player.sprite, pacman.Player.location_rect)
+    screen.blit(pacman.Player.sprite, (pacman.Player.posx, pacman.Player.posy), pacman.Player.sprite_rect)
 
 
 def resizeSurface(Surface):
@@ -58,7 +58,7 @@ while running:
     if keys[pygame.K_ESCAPE]:
         running = False
 
-    Entity.setMove(Entity, pacman.Player, direction)
+    player.Move(direction)
 
     pygame.display.update()
 

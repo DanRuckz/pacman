@@ -41,8 +41,9 @@ class mainMap(pygame.sprite.Sprite):
     def getSurface(self):
         return self.mapSurface
 
-    def drawObject(self, image, position, rect):
-        self.mapSurface.blit(image, position, rect)
+    def drawObject(self, image, position, sprite_rect, location_rect):
+        self.mapSurface.fill((0, 0, 0), location_rect)
+        self.mapSurface.blit(image, position, sprite_rect)
 
 
 class Tile:

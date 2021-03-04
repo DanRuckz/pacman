@@ -1,40 +1,32 @@
 import pygame
 from settings import *
-
+from abc import ABC, abstractmethod
 
 class Entity:
-    # @staticmethod
 
-    def setMove(self, obj, direction):
-        if direction == "Left":
-            self.moveLeft(self, obj)
-        if direction == "Right":
-            self.moveRight(self, obj)
-        if direction == "Up":
-            self.moveUp(self, obj)
-        if direction == "Down":
-            self.moveDown(self, obj)
+    @abstractmethod
+    def Move(self, direction):
+       pass
 
+
+'''
     def moveLeft(self, obj):
         obj.changeDirection(obj, "Left")
         obj.posx -= obj.speed
-        obj.rect.x = obj.posx
-        obj.turnLeft = True
+        obj.location_rect.x = obj.posx
 
     def moveRight(self, obj):
         obj.changeDirection(obj, "Right")
         obj.posx += obj.speed
-        obj.rect.x = obj.posx
-        obj.turnRight = True
+        obj.location_rect.x = obj.posx
 
     def moveUp(self, obj):
         obj.changeDirection(obj, "Up")
         obj.posy -= obj.speed
-        obj.rect.y = obj.posy
-        obj.turnUp = True
+        obj.location_rect.y = obj.posy
 
     def moveDown(self, obj):
         obj.changeDirection(obj, "Down")
         obj.posy += obj.speed
-        obj.rect.y = obj.posy
-        obj.turnDown = True
+        obj.location_rect.y = obj.posy
+'''
