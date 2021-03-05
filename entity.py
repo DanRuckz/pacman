@@ -19,5 +19,5 @@ class Entity:
         obj.setMovingDirection(direction)
 
     def checkPosition_forMovement(obj):
-        if ((obj.posx - 1) % CUBESIZE == 0 and (obj.posy - 1) % CUBESIZE == 0):
+        if (obj.posx - 1) % CUBESIZE == 0 and (obj.posy - 1) % CUBESIZE == 0:
             return True
