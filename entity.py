@@ -1,13 +1,20 @@
 import pygame
 from settings import *
-from abc import ABC, abstractmethod
 
 class Entity:
 
-    @abstractmethod
-    def Move(self, direction):
-       pass
+    def Move(obj, direction):
+        if direction == "Left":
+           obj.posx -= obj.speed
 
+        if direction == "Right":
+            obj.posx += obj.speed
+
+        if direction == "Up":
+            obj.posy -= obj.speed
+
+        if direction == "Down":
+            obj.posy += obj.speed
 
 '''
     def moveLeft(self, obj):

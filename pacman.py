@@ -7,26 +7,29 @@ from entity import Entity
 class Player(Entity):
 
     Player = LoadFile.spritesheet
-    sprite = pygame.Rect(168, 0, SPRITESIZE, SPRITESIZE)
     width = SPRITESIZE
     height = SPRITESIZE
-    posx = 0
-    posy = 0
+    posx = 1
+    posy = 1
     speed = 2
-    rect = pygame.Rect(posx, posy, width, height)
+    sprite_rect = pygame.Rect(posx, posy, width, height)
 
-    def changeDirection(self, currentDirection):
-        if currentDirection == "Left":
-            self.sprite = pygame.Rect(0, 0, SPRITESIZE, SPRITESIZE)
-            return self.sprite
-        elif currentDirection == "Right":
-            self.sprite = pygame.Rect(168, 0, SPRITESIZE, SPRITESIZE)
-            return self.sprite
-        elif currentDirection == "Up":
-            self.sprite = pygame.Rect(336, 0, SPRITESIZE, SPRITESIZE)
-            return self.sprite
-        elif currentDirection == "Down":
-            self.sprite = pygame.Rect(504, 0, SPRITESIZE, SPRITESIZE)
-            return self.sprite
+    def Move(self, direction):
 
+        if direction == "Left":
+            self.sprite_rect.x = SPRITESIZE*0
 
+        elif direction == "Right":
+            self.sprite_rect.x = SPRITESIZE*3
+
+        elif direction == "Up":
+            self.sprite_rect.x = SPRITESIZE*6
+
+        elif direction == "Down":
+            self.sprite_rect.x = SPRITESIZE*9
+
+        super().Move(direction)
+
+    def getPosision(self):
+        POS = [self.posx, self.posy]
+        return POS

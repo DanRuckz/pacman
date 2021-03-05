@@ -21,8 +21,8 @@ player = pacman.Player()
 
 def drawObjects():
     screen.blit(fullMap.getSurface(), (0, TOPSECTION))
-    #fullMap.drawObject(pacman.Player.Player, (pacman.Player.posx, pacman.Player.posy), pacman.Player.sprite, pacman.Player.location_rect)
-    screen.blit(pacman.Player.sprite, (pacman.Player.posx, pacman.Player.posy), pacman.Player.sprite_rect)
+    fullMap.drawObject(player.Player, player.getPosision(), player.sprite_rect)
+    #screen.blit(player.Player, (player.posx, player.posy), player.sprite_rect)
 
 
 def resizeSurface(Surface):

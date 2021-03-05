@@ -40,11 +40,12 @@ class mainMap(pygame.sprite.Sprite):
 
     def getSurface(self):
         return self.mapSurface
-
-    def drawObject(self, image, position, sprite_rect, location_rect):
-        self.mapSurface.fill((0, 0, 0), location_rect)
+    def drawObject(self, image, position, sprite_rect):
+        x = position[0]
+        y = position[1]
+        recttoDelete = pygame.Rect(x, y, SPRITESIZE, SPRITESIZE)
+        self.mapSurface.fill((0, 0, 0), recttoDelete)
         self.mapSurface.blit(image, position, sprite_rect)
-
 
 class Tile:
 
