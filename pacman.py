@@ -25,24 +25,24 @@ class Player(Entity):
     def Move(self, direction):
         self.pendingMovingDirection = direction
         if self.movingDirection == "Left" or self.movingDirection == "Right":
-            Horizontal = True
+            horizontal = True
         else:
-            Horizontal = False
+            horizontal = False
 
-        if Horizontal and (direction == "Left" or direction == "Right"):
+        if horizontal and (direction == "Left" or direction == "Right"):
             super().Move(direction)
 
-        elif not Horizontal and (direction == "Up" or direction == "Down"):
+        elif not horizontal and (direction == "Up" or direction == "Down"):
             super().Move(direction)
 
-        elif Horizontal and (direction == "Up" or direction == "Down"):
-            if super().checkPosition_forMovement() == True:
+        elif horizontal and (direction == "Up" or direction == "Down"):
+            if super().checkPosition_forMovement() is True:
                 super().Move(direction)
             else:
                 super().Move(self.movingDirection)
 
-        elif not Horizontal and (direction == "Left" or direction == "Right"):
-            if super().checkPosition_forMovement() == True:
+        elif not horizontal and (direction == "Left" or direction == "Right"):
+            if super().checkPosition_forMovement() is True:
                 super().Move(direction)
             else:
                 super().Move(self.movingDirection)
@@ -54,7 +54,7 @@ class Player(Entity):
         return self.playerImage
 
     def getPosition(self):
-        return (self.posx, self.posy)
+        return self.posx, self.posy
 
     def getRect(self):
         return self.sprite_rect
