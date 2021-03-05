@@ -1,11 +1,18 @@
-import pygame
-import LoadFile
 import csv
 import os
+
+import pygame
+
+import LoadFile
 from settings import *
 
 
 class mainMap(pygame.sprite.Sprite):
+    # SET THOSE IN THE MAIN FUNTION BY USING SETOBJECTTODRAW FUNCTION
+    objectImage = 0
+    objectPos = 0
+    objectRect = 0
+
     def __init__(self, mapSize):
         super().__init__()
         self.mapSurface = pygame.Surface(mapSize)
@@ -38,14 +45,17 @@ class mainMap(pygame.sprite.Sprite):
         for tile in self.tiles:
             self.mapSurface.blit(LoadFile.map, (tile.posx, tile.posy), tile.getRect())
 
-    def getSurface(self):
+    def drawMap(self):
+        for black in self.tiles:
+            if (black.key == BLACKCUBE):
+                self.mapSurface.blit(LoadFile.map, (black.posx, black.posy), black.getRect())
+        self.mapSurface.blit(self.objectImage, self.objectPos, self.objectRect)
         return self.mapSurface
-    def drawObject(self, image, position, sprite_rect):
-        x = position[0]
-        y = position[1]
-        recttoDelete = pygame.Rect(x, y, SPRITESIZE, SPRITESIZE)
-        self.mapSurface.fill((0, 0, 0), recttoDelete)
-        self.mapSurface.blit(image, position, sprite_rect)
+
+    def setObject_toDraw(self, image, pos, rect):
+        self.objectImage = image
+        self.objectPos = pos
+        self.objectRect = rect
 
 class Tile:
 

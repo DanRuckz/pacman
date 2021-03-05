@@ -6,30 +6,91 @@ from entity import Entity
 
 class Player(Entity):
 
-    Player = LoadFile.spritesheet
-    width = SPRITESIZE
-    height = SPRITESIZE
-    posx = 1
-    posy = 1
-    speed = 2
-    sprite_rect = pygame.Rect(posx, posy, width, height)
+    def __init__(self):
+        self.playerImage = LoadFile.spritesheet
+        self.width = SPRITESIZE
+        self.height = SPRITESIZE
+        self.spriteinRect_posx = 0
+        self.spriteinRect_posy = 0
+        self.posx = CUBESIZE + 1
+        self.posy = CUBESIZE + 1
+        self.speed = 2
+        self.sprite_rect = pygame.Rect(self.spriteinRect_posx, self.spriteinRect_posy, self.width, self.height)
+        self.animationDirection = 0
+        self.animationIndex = 0
+        self.scrollDirection = 0
+        self.movingDirection = 0
+        self.pendingMovingDirection = 0
 
     def Move(self, direction):
+        self.pendingMovingDirection = direction
+        if self.movingDirection == "Left" or self.movingDirection == "Right":
+            Horizontal = True
+        else:
+            Horizontal = False
 
-        if direction == "Left":
-            self.sprite_rect.x = SPRITESIZE*0
+        if Horizontal and (direction == "Left" or direction == "Right"):
+            super().Move(direction)
 
-        elif direction == "Right":
-            self.sprite_rect.x = SPRITESIZE*3
+        elif not Horizontal and (direction == "Up" or direction == "Down"):
+            super().Move(direction)
 
-        elif direction == "Up":
-            self.sprite_rect.x = SPRITESIZE*6
+        elif Horizontal and (direction == "Up" or direction == "Down"):
+            if super().checkPosition_forMovement() == True:
+                super().Move(direction)
+            else:
+                super().Move(self.movingDirection)
 
-        elif direction == "Down":
-            self.sprite_rect.x = SPRITESIZE*9
+        elif not Horizontal and (direction == "Left" or direction == "Right"):
+            if super().checkPosition_forMovement() == True:
+                super().Move(direction)
+            else:
+                super().Move(self.movingDirection)
 
-        super().Move(direction)
+        elif self.movingDirection == 0:
+            super().Move(direction)
 
-    def getPosision(self):
-        POS = [self.posx, self.posy]
-        return POS
+    def getImage(self):
+        return self.playerImage
+
+    def getPosition(self):
+        return (self.posx, self.posy)
+
+    def getRect(self):
+        return self.sprite_rect
+
+    def animate(self, direction):
+
+        if direction == "Hell":
+            return
+
+        if self.animationIndex == 0:
+            self.scrollDirection = "Incrementing"
+
+        if self.animationIndex == 2:
+            self.scrollDirection = "Decrementing"
+
+        if self.scrollDirection == "Incrementing":
+            self.animationIndex += 1
+
+        if self.scrollDirection == "Decrementing":
+            self.animationIndex -= 1
+
+        if self.movingDirection == "Left":
+            self.animationDirection = 0 + self.animationIndex
+            self.sprite_rect.x = SPRITESIZE * self.animationDirection
+
+        elif self.movingDirection == "Right":
+            self.animationDirection = 3 + self.animationIndex
+            self.sprite_rect.x = SPRITESIZE * self.animationDirection
+
+        elif self.movingDirection == "Up":
+            self.animationDirection = 6 + self.animationIndex
+            self.sprite_rect.x = SPRITESIZE * self.animationDirection
+
+        elif self.movingDirection == "Down":
+            self.animationDirection = 9 + self.animationIndex
+            self.sprite_rect.x = SPRITESIZE * self.animationDirection
+
+    def setMovingDirection(self, direction):
+        self.movingDirection = direction

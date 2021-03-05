@@ -2,7 +2,6 @@ import pygame
 import pacman
 import enemy
 from map import mainMap
-import auxiliary
 from settings import *
 from entity import Entity
 
@@ -20,9 +19,8 @@ fullMap = mainMap(RESOLUTION)
 player = pacman.Player()
 
 def drawObjects():
-    screen.blit(fullMap.getSurface(), (0, TOPSECTION))
-    fullMap.drawObject(player.Player, player.getPosision(), player.sprite_rect)
-    #screen.blit(player.Player, (player.posx, player.posy), player.sprite_rect)
+    fullMap.setObject_toDraw(player.playerImage, player.getPosition(), player.getRect())
+    screen.blit(fullMap.drawMap(), (0, TOPSECTION))
 
 
 def resizeSurface(Surface):
@@ -33,14 +31,14 @@ def resizeSurface(Surface):
 collision = False
 running = True
 direction = 0
-
+animationCounter = 0
 while running:
     screen.fill((0, 0, 0))
     drawObjects()
     keys = pygame.key.get_pressed()
     for event in pygame.event.get():
         if event.type == pygame.VIDEORESIZE:
-            resizeSurface(fullMap.getSurface())
+            resizeSurface(fullMap.drawMap())
             resizeSurface(screen)
         if event.type == pygame.QUIT:
             running = False
@@ -58,11 +56,16 @@ while running:
     if keys[pygame.K_ESCAPE]:
         running = False
 
+    animationCounter += clock.get_time()
+    if animationCounter > 100:
+        player.animate(direction)
+        animationCounter = 0
+
     player.Move(direction)
 
     pygame.display.update()
 
-    clock.tick(60)
+    clock.tick(40)
 
 
 

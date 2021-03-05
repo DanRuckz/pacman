@@ -5,7 +5,7 @@ class Entity:
 
     def Move(obj, direction):
         if direction == "Left":
-           obj.posx -= obj.speed
+            obj.posx -= obj.speed
 
         if direction == "Right":
             obj.posx += obj.speed
@@ -16,24 +16,8 @@ class Entity:
         if direction == "Down":
             obj.posy += obj.speed
 
-'''
-    def moveLeft(self, obj):
-        obj.changeDirection(obj, "Left")
-        obj.posx -= obj.speed
-        obj.location_rect.x = obj.posx
+        obj.setMovingDirection(direction)
 
-    def moveRight(self, obj):
-        obj.changeDirection(obj, "Right")
-        obj.posx += obj.speed
-        obj.location_rect.x = obj.posx
-
-    def moveUp(self, obj):
-        obj.changeDirection(obj, "Up")
-        obj.posy -= obj.speed
-        obj.location_rect.y = obj.posy
-
-    def moveDown(self, obj):
-        obj.changeDirection(obj, "Down")
-        obj.posy += obj.speed
-        obj.location_rect.y = obj.posy
-'''
+    def checkPosition_forMovement(obj):
+        if ((obj.posx - 1) % CUBESIZE == 0 and (obj.posy - 1) % CUBESIZE == 0):
+            return True

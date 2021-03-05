@@ -1,5 +1,4 @@
 import pygame
-import auxiliary
 import LoadFile
 from entity import *
 class Enemy(Entity):
