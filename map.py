@@ -1,25 +1,21 @@
 import csv
 import os
-
 import pygame
-
 import LoadFile
 from settings import *
 
 
 class mainMap(pygame.sprite.Sprite):
-    # SET THOSE IN THE MAIN FUNTION BY USING SETOBJECTTODRAW FUNCTION
-    objectImage = 0
-    objectPos = 0
-    objectRect = 0
 
     def __init__(self, mapSize):
         super().__init__()
         self.mapSurface = pygame.Surface(mapSize)
         self.mapSurface.set_colorkey((0, 0, 0))
         self.tiles = []
+        self.nonblack = []
         self.parseData()
         self.fillMap()
+        self.nonBlackRects()
 
     def parseData(self):
         key = "none"
@@ -47,7 +43,7 @@ class mainMap(pygame.sprite.Sprite):
 
     def drawMap(self):
         for black in self.tiles:
-            if (black.key == BLACKCUBE):
+            if black.key is BLACKCUBE:
                 self.mapSurface.blit(LoadFile.map, (black.posx, black.posy), black.getRect())
         self.mapSurface.blit(self.objectImage, self.objectPos, self.objectRect)
         return self.mapSurface
@@ -57,6 +53,18 @@ class mainMap(pygame.sprite.Sprite):
         self.objectPos = pos
         self.objectRect = rect
 
+    def getTiles(self):
+        return self.tiles
+
+    def nonBlackRects(self):
+        for nonblack in self.tiles:
+            if nonblack.key is not BLACKCUBE:
+                self.nonblack.append(nonblack)
+
+    def getNonBlack(self):
+        return self.nonblack
+
+
 class Tile:
 
     def __init__(self, key, posx, posy, rectx, recty):
@@ -65,11 +73,14 @@ class Tile:
         self.recty = recty
         self.posx = posx
         self.posy = posy
+        self.initspriterect()
         self.initrect()
 
-    def initrect(self):
-        self.rect = pygame.Rect(self.rectx, self.recty, CUBESIZE, CUBESIZE)
+    def initspriterect(self):
+        self.spriterect = pygame.Rect(self.rectx, self.recty, CUBESIZE, CUBESIZE)
 
+    def initrect(self):
+        self.rect = pygame.Rect(self.posx, self.posy, CUBESIZE, CUBESIZE)
 
     def getRect(self):
-        return self.rect
+        return self.spriterect

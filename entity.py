@@ -21,3 +21,4 @@ class Entity:
     def checkPosition_forMovement(obj):
         if (obj.posx - 1) % CUBESIZE == 0 and (obj.posy - 1) % CUBESIZE == 0:
             return True
+

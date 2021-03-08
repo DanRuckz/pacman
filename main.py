@@ -57,15 +57,14 @@ while running:
         running = False
 
     animationCounter += clock.get_time()
-    if animationCounter > 100:
+    if animationCounter > 50:
         player.animate(direction)
         animationCounter = 0
-
+    player.collision(fullMap.getNonBlack())
     player.Move(direction)
-
     pygame.display.update()
 
-    clock.tick(40)
+    clock.tick(60)
 
 
 

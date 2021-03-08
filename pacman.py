@@ -21,6 +21,7 @@ class Player(Entity):
         self.scrollDirection = 0
         self.movingDirection = 0
         self.pendingMovingDirection = 0
+        self.updateRect()
 
     def Move(self, direction):
         self.pendingMovingDirection = direction
@@ -49,6 +50,7 @@ class Player(Entity):
 
         elif self.movingDirection == 0:
             super().Move(direction)
+        self.updateRect()
 
     def getImage(self):
         return self.playerImage
@@ -94,3 +96,12 @@ class Player(Entity):
 
     def setMovingDirection(self, direction):
         self.movingDirection = direction
+
+    def updateRect(self):
+        self.rect = pygame.Rect(self.posx, self.posy, SPRITESIZE, SPRITESIZE)
+
+    def collision(self, other):
+        for element in other:
+            collision = element.rect.collidepoint(self.rect.top, self.rect.right / 2)
+            if collision:
+                print(element.rect, self.rect.right / 2, self.rect.top)
