@@ -19,7 +19,7 @@ fullMap = mainMap(RESOLUTION)
 player = pacman.Player()
 
 def drawObjects():
-    fullMap.setObject_toDraw(player.playerImage, player.getPosition(), player.getRect())
+    fullMap.setObject_toDraw(player.playerImage, player.getPosition(), player.getRect(), player.getspriteRect())
     screen.blit(fullMap.drawMap(), (0, TOPSECTION))
 
 

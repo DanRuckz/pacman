@@ -16,6 +16,7 @@ class Player(Entity):
         self.posy = CUBESIZE + 1
         self.speed = 2
         self.sprite_rect = pygame.Rect(self.spriteinRect_posx, self.spriteinRect_posy, self.width, self.height)
+        self.rect = 0
         self.animationDirection = 0
         self.animationIndex = 0
         self.scrollDirection = 0
@@ -50,6 +51,7 @@ class Player(Entity):
 
         elif self.movingDirection == 0:
             super().Move(direction)
+
         self.updateRect()
 
     def getImage(self):
@@ -59,6 +61,9 @@ class Player(Entity):
         return self.posx, self.posy
 
     def getRect(self):
+        return self.rect
+
+    def getspriteRect(self):
         return self.sprite_rect
 
     def animate(self, direction):
@@ -102,6 +107,11 @@ class Player(Entity):
 
     def collision(self, other):
         for element in other:
-            collision = element.rect.collidepoint(self.rect.top, self.rect.right / 2)
-            if collision:
-                print(element.rect, self.rect.right / 2, self.rect.top)
+            if element.rect.collidepoint(self.rect.midleft):
+                print("midleft collision")
+            if element.rect.collidepoint(self.rect.midtop):
+                print("midtop collision")
+            if element.rect.collidepoint(self.rect.midright):
+                print("midright collision")
+            if element.rect.collidepoint(self.rect.midbottom):
+                print("midbottom collision")

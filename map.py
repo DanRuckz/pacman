@@ -17,6 +17,7 @@ class mainMap(pygame.sprite.Sprite):
         self.fillMap()
         self.nonBlackRects()
 
+
     def parseData(self):
         key = "none"
         csvmap = self.readcsv("spritesheet/big_map.csv")
@@ -45,13 +46,15 @@ class mainMap(pygame.sprite.Sprite):
         for black in self.tiles:
             if black.key is BLACKCUBE:
                 self.mapSurface.blit(LoadFile.map, (black.posx, black.posy), black.getRect())
-        self.mapSurface.blit(self.objectImage, self.objectPos, self.objectRect)
+        self.mapSurface.blit(self.objectImage, self.objectPos, self.objspriteRect)
+        pygame.draw.rect(self.mapSurface, (255, 255, 255), self.objectRect, 3)
         return self.mapSurface
 
-    def setObject_toDraw(self, image, pos, rect):
+    def setObject_toDraw(self, image, pos, rect, sprite_rect):
         self.objectImage = image
         self.objectPos = pos
         self.objectRect = rect
+        self.objspriteRect = sprite_rect
 
     def getTiles(self):
         return self.tiles
@@ -60,6 +63,8 @@ class mainMap(pygame.sprite.Sprite):
         for nonblack in self.tiles:
             if nonblack.key is not BLACKCUBE:
                 self.nonblack.append(nonblack)
+                pygame.draw.rect(self.mapSurface, (255, 255, 255), (nonblack.posx, nonblack.posy, CUBESIZE, CUBESIZE),
+                                 3)
 
     def getNonBlack(self):
         return self.nonblack
