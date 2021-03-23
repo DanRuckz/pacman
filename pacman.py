@@ -52,6 +52,8 @@ class Player(Entity):
 
         elif self.movingDirection == 0:
             super().Move(direction, self.colliding)
+
+        print(self.movingDirection)
         self.updateRect()
         self.colliding.clear()
 

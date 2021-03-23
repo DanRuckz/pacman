@@ -47,7 +47,7 @@ class mainMap(pygame.sprite.Sprite):
             if black.key is BLACKCUBE:
                 self.mapSurface.blit(LoadFile.map, (black.posx, black.posy), black.getRect())
         self.mapSurface.blit(self.objectImage, self.objectPos, self.objspriteRect)
-        pygame.draw.rect(self.mapSurface, (255, 255, 255), self.objectRect, 3)
+        # pygame.draw.rect(self.mapSurface, (255, 255, 255), self.objectRect, 3)
         return self.mapSurface
 
     def setObject_toDraw(self, image, pos, rect, sprite_rect):
@@ -63,8 +63,7 @@ class mainMap(pygame.sprite.Sprite):
         for nonblack in self.tiles:
             if nonblack.key is not BLACKCUBE:
                 self.nonblack.append(nonblack)
-                pygame.draw.rect(self.mapSurface, (255, 255, 255), (nonblack.posx, nonblack.posy, CUBESIZE, CUBESIZE),
-                                 3)
+                #pygame.draw.rect(self.mapSurface, (255, 255, 255), (nonblack.posx, nonblack.posy, CUBESIZE, CUBESIZE), 3)
 
     def getNonBlack(self):
         return self.nonblack
