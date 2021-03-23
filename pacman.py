@@ -22,6 +22,7 @@ class Player(Entity):
         self.scrollDirection = 0
         self.movingDirection = 0
         self.pendingMovingDirection = 0
+        self.colliding = []
         self.updateRect()
 
     def Move(self, direction):
@@ -32,27 +33,27 @@ class Player(Entity):
             horizontal = False
 
         if horizontal and (direction == "Left" or direction == "Right"):
-            super().Move(direction)
+            super().Move(direction, self.colliding)
 
         elif not horizontal and (direction == "Up" or direction == "Down"):
-            super().Move(direction)
+            super().Move(direction, self.colliding)
 
         elif horizontal and (direction == "Up" or direction == "Down"):
             if super().checkPosition_forMovement() is True:
-                super().Move(direction)
+                super().Move(direction, self.colliding)
             else:
-                super().Move(self.movingDirection)
+                super().Move(self.movingDirection, self.colliding)
 
         elif not horizontal and (direction == "Left" or direction == "Right"):
             if super().checkPosition_forMovement() is True:
-                super().Move(direction)
+                super().Move(direction, self.colliding)
             else:
-                super().Move(self.movingDirection)
+                super().Move(self.movingDirection, self.colliding)
 
         elif self.movingDirection == 0:
-            super().Move(direction)
-
+            super().Move(direction, self.colliding)
         self.updateRect()
+        self.colliding.clear()
 
     def getImage(self):
         return self.playerImage
@@ -107,11 +108,20 @@ class Player(Entity):
 
     def collision(self, other):
         for element in other:
-            if element.rect.collidepoint(self.rect.midleft):
-                print("midleft collision")
-            if element.rect.collidepoint(self.rect.midtop):
-                print("midtop collision")
-            if element.rect.collidepoint(self.rect.midright):
-                print("midright collision")
-            if element.rect.collidepoint(self.rect.midbottom):
-                print("midbottom collision")
+
+            if element.rect.collidepoint(self.rect.left - 2, self.rect.centery):
+                colliding_left = "Left"
+                self.colliding.append(colliding_left)
+
+            elif element.rect.collidepoint(self.rect.centerx, self.rect.top - 2):
+                colliding_up = "Up"
+                self.colliding.append(colliding_up)
+
+            elif element.rect.collidepoint(self.rect.right + 2, self.rect.centery):
+                colliding_right = "Right"
+                self.colliding.append(colliding_right)
+
+
+            elif element.rect.collidepoint(self.rect.centerx, self.rect.bottom + 2):
+                colliding_down = "Down"
+                self.colliding.append(colliding_down)
