@@ -6,16 +6,16 @@ class Entity:
 
     def Move(obj, direction, colliding):
 
-        if direction == "Left" and not "Left" in colliding:
+        if direction == Direction.LEFT and not Direction.LEFT in colliding:
             obj.posx -= obj.speed
 
-        if direction == "Right" and not "Right" in colliding:
+        if direction == Direction.RIGHT and not Direction.RIGHT in colliding:
             obj.posx += obj.speed
 
-        if direction == "Up" and not "Up" in colliding:
+        if direction == Direction.UP and not Direction.UP in colliding:
             obj.posy -= obj.speed
 
-        if direction == "Down" and not "Down" in colliding:
+        if direction == Direction.DOWN and not Direction.DOWN in colliding:
             obj.posy += obj.speed
 
         obj.setMovingDirection(direction)

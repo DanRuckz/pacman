@@ -27,24 +27,24 @@ class Player(Entity):
 
     def Move(self, direction):
         self.pendingMovingDirection = direction
-        if self.movingDirection == "Left" or self.movingDirection == "Right":
+        if self.movingDirection == Direction.LEFT or self.movingDirection == Direction.RIGHT:
             horizontal = True
         else:
             horizontal = False
 
-        if horizontal and (direction == "Left" or direction == "Right"):
+        if horizontal and (direction == Direction.LEFT or direction == Direction.RIGHT):
             super().Move(direction, self.colliding)
 
-        elif not horizontal and (direction == "Up" or direction == "Down"):
+        elif not horizontal and (direction == Direction.UP or direction == Direction.DOWN):
             super().Move(direction, self.colliding)
 
-        elif horizontal and (direction == "Up" or direction == "Down"):
+        elif horizontal and (direction == Direction.UP or direction == Direction.DOWN):
             if super().checkPosition_forMovement() is True:
                 super().Move(direction, self.colliding)
             else:
                 super().Move(self.movingDirection, self.colliding)
 
-        elif not horizontal and (direction == "Left" or direction == "Right"):
+        elif not horizontal and (direction == Direction.LEFT or direction == Direction.RIGHT):
             if super().checkPosition_forMovement() is True:
                 super().Move(direction, self.colliding)
             else:
@@ -71,7 +71,7 @@ class Player(Entity):
 
     def animate(self, direction):
 
-        if direction == "Hell":
+        if direction == Direction.HELL:
             return
 
         if self.animationIndex == 0:
@@ -86,19 +86,19 @@ class Player(Entity):
         if self.scrollDirection == "Decrementing":
             self.animationIndex -= 1
 
-        if self.movingDirection == "Left":
+        if self.movingDirection == Direction.LEFT:
             self.animationDirection = 0 + self.animationIndex
             self.sprite_rect.x = SPRITESIZE * self.animationDirection
 
-        elif self.movingDirection == "Right":
+        elif self.movingDirection == Direction.RIGHT:
             self.animationDirection = 3 + self.animationIndex
             self.sprite_rect.x = SPRITESIZE * self.animationDirection
 
-        elif self.movingDirection == "Up":
+        elif self.movingDirection == Direction.UP:
             self.animationDirection = 6 + self.animationIndex
             self.sprite_rect.x = SPRITESIZE * self.animationDirection
 
-        elif self.movingDirection == "Down":
+        elif self.movingDirection == Direction.DOWN:
             self.animationDirection = 9 + self.animationIndex
             self.sprite_rect.x = SPRITESIZE * self.animationDirection
 
@@ -112,18 +112,18 @@ class Player(Entity):
         for element in other:
 
             if element.rect.collidepoint(self.rect.left - 2, self.rect.centery):
-                colliding_left = "Left"
+                colliding_left = Direction.LEFT
                 self.colliding.append(colliding_left)
 
             elif element.rect.collidepoint(self.rect.centerx, self.rect.top - 2):
-                colliding_up = "Up"
+                colliding_up = Direction.UP
                 self.colliding.append(colliding_up)
 
             elif element.rect.collidepoint(self.rect.right + 2, self.rect.centery):
-                colliding_right = "Right"
+                colliding_right = Direction.RIGHT
                 self.colliding.append(colliding_right)
 
 
             elif element.rect.collidepoint(self.rect.centerx, self.rect.bottom + 2):
-                colliding_down = "Down"
+                colliding_down = Direction.DOWN
                 self.colliding.append(colliding_down)

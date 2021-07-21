@@ -3,9 +3,6 @@ import pacman
 import enemy
 from map import mainMap
 from settings import *
-from entity import Entity
-
-
 
 pygame.init()  # to init pygame
 clock = pygame.time.Clock()
@@ -44,15 +41,15 @@ while running:
             running = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_a:
-                direction = "Left"
+                direction = Direction.LEFT
             if event.key == pygame.K_d:
-                direction = "Right"
+                direction = Direction.RIGHT
             if event.key == pygame.K_w:
-                direction = "Up"
+                direction = Direction.UP
             if event.key == pygame.K_s:
-                direction = "Down"
+                direction = Direction.DOWN
             if event.key == pygame.K_SPACE:
-                direction = "Hell"
+                direction = Direction.HELL
     if keys[pygame.K_ESCAPE]:
         running = False
 

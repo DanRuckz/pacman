@@ -1,0 +1,19 @@
+Pacman project:
+
+1) This project is a proof of concept of the pacman game, it's a replica of the all too known
+pacman game.
+
+2) This project is for entertainment purposes, and for my own self development/fun.
+
+3) It is not estimated to be a huge project, just a simple small game well made.
+
+4) The Objects in the game: A basic starting menu (a few buttons with options) The map 
+(including the bounds and so), the player, the enemies
+and the collectibles.
+
+5) The ways to interact with the project is first of all a menu that will open up asking the 
+player to define/change various settings such as sound, see the credits and perhaps a resolution
+change will be added and of course to start the game. After the game has started then the
+player will take the roll of pacman and will have to collect the collectibles while avoiding
+all kinds of ghosty enemies. as it is just a proof of concept, the pacman will win once 
+the collectibles are collected and will lost upon collision with the ghosts (3 lives).
